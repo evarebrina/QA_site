@@ -14,10 +14,10 @@ class Question(models.Model):
     objects = QuestionManager()
     title = models.CharField(max_length=255)
     text = models.TextField()
-    addes_at = models.DateTimeField(auto_now_add=True)
+    added_at = models.DateTimeField(auto_now_add=True)
     rating = models.IntegerField(default=0)
     author = models.OneToOneField(User, null=True, on_delete=models.SET_NULL)
-    likes = models.ForeignKey(User, related_name='question_like_user', null=True, on_delete=models.SET_NULL)
+    likes = models.ManyToManyField(User, related_name='question_like_user', null=True)
     def __unicode__(self):
         return self.title
     def get_absolute_url(self):
