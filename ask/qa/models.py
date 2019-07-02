@@ -14,7 +14,7 @@ class Question(models.Model):
     objects = QuestionManager()
     title = models.CharField(max_length=255)
     text = models.TextField()
-    asses_at = models.DateTimeField(auto_now_add=True)
+    addes_at = models.DateTimeField(auto_now_add=True)
     rating = models.IntegerField(default=0)
     author = models.OneToOneField(User, null=True, on_delete=models.SET_NULL)
     likes = models.ForeignKey(User, related_name='question_like_user', null=True, on_delete=models.SET_NULL)
