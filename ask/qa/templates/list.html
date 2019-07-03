@@ -1,24 +1,28 @@
-<ul>
-{% for question in questions %}
-	<li>{{ question }} <a href="{{ question.get_absolute_url }}">Read</a></li>
-{% endfor %}
+{% extends "base.html" %}
+{% block title %}
+    {{ block.super }} - List
+{% endblock %}
+{% block content %}
+    <ul>
+    {% for question in questions %}
+        <li>{{ question }} <a href="{{ question.get_absolute_url }}">Read</a></li>
+    {% endfor %}
 
-
-
-<div class="pagination">
-	<span class="step-links">
-		{% if page.has_previous %}
-			<a href="{{ page.paginator.baseurl }}1">&laquo; first</a>
-			<a href="{{ page.paginator.baseurl }}{{ page.previous_page_number }}">previous</a>
-		{% endif %}
-		
-		<span class="current">
-			Page {{ page.number }} of {{ page.paginator.num_pages }}.
-		</span>
-		
-		{% if page.has_next %}
-			<a href="{{ page.paginator.baseurl }}{{ page.next_page_number }}">next</a>
-			<a href="{{ page.paginator.baseurl }}{{ page.paginator.num_pages }}">last &raquo;</a>
-		{% endif %}
-	</span>
-</div>
+    <div class="pagination">
+        <span class="step-links">
+            {% if page.has_previous %}
+                <a href="{{ page.paginator.baseurl }}1">&laquo; first</a>
+                <a href="{{ page.paginator.baseurl }}{{ page.previous_page_number }}">previous</a>
+            {% endif %}
+            
+            <span class="current">
+                Page {{ page.number }} of {{ page.paginator.num_pages }}.
+            </span>
+            
+            {% if page.has_next %}
+                <a href="{{ page.paginator.baseurl }}{{ page.next_page_number }}">next</a>
+                <a href="{{ page.paginator.baseurl }}{{ page.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+{% endblock %}
