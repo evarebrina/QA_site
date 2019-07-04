@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}{{ block.super }} - signup{% endblock %}
+{% block content %}
+<form autocomplete="off" method="post">
+    <fieldset>
+        {% csrf_token %}
+        <div class="control-group">
+            <div class="form-group">
+            <!--    <label class="control-label">{{ form.title.label }}</label>
+                <div class="controls">{{ form.title }}</div>
+            </div>
+            <div class="form-group">
+                <label class="control-lavel">{{ form.text.label }}</label>
+                <div class="controls">{{ form.text }}</div>-->
+                {{ form.as_p }}
+            </div>
+        </div>
+        <div class="form-actions">
+            <div class="text-right">
+                <input type="submit" class="btn btn-primary" value="Submit">
+            </div>
+        </div>
+    </fieldset>
+</form>
+{% endblock %}

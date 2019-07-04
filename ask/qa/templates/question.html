@@ -8,7 +8,7 @@
                 <img src="/img/no-avatar.png" class="align-self-start mr-3 img-thumbnail" alt="...">
                 <div class="media-body">
                     <h5 class="mt-0 mb-1">{{ question}}</h5>
-                    <div class="text-muted">@username</div>
+                    <div class="text-muted">@{{ question.author }}</div>
                     {{ question.text }}
                 </div>
         </div>
@@ -44,7 +44,7 @@
                     <li class="media">
                         <img src="/img/no-avatar.png" class="align-self-start mr-3 img-thumbnail" alt="...">
                         <div class="media-body">
-                            <div class="mt-0 mb-1 text-muted">@username</div>
+                            <div class="mt-0 mb-1 text-muted">@{{ answer.author }}</div>
                             {{ answer.text }}
                         </div>
                     </li>
