@@ -3,26 +3,53 @@
     {{ block.super }} - List
 {% endblock %}
 {% block content %}
-    <ul>
+    <ul class="list-unstyled">
     {% for question in questions %}
-        <li>{{ question }} <a href="{{ question.get_absolute_url }}">Read</a></li>
+        <li class=media style="margin-top:10px">
+            <img src="/img/no-avatar.png" alt="" class="align-self-start mr-3">
+            <div class="media-body">
+                <h6 class="mt-0 mb-1">{{ question }}</h6>
+                @username <a href="{{ question.get_absolute_url }}">Read</a>
+            </div>
+            
+        </li>
     {% endfor %}
 
-    <div class="pagination">
-        <span class="step-links">
-            {% if page.has_previous %}
-                <a href="{{ page.paginator.baseurl }}1">&laquo; first</a>
-                <a href="{{ page.paginator.baseurl }}{{ page.previous_page_number }}">previous</a>
-            {% endif %}
-            
-            <span class="current">
-                Page {{ page.number }} of {{ page.paginator.num_pages }}.
-            </span>
-            
-            {% if page.has_next %}
-                <a href="{{ page.paginator.baseurl }}{{ page.next_page_number }}">next</a>
-                <a href="{{ page.paginator.baseurl }}{{ page.paginator.num_pages }}">last &raquo;</a>
-            {% endif %}
-        </span>
-    </div>
+    
+    <nav aria-label="Page navigation" style="margin-top:20px">
+        <ul class="pagination">
+                {% if page.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ page.paginator.baseurl }}1" aria-label="First">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="{{ page.paginator.baseurl }}{{ page.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">previous</span>
+                        </a>
+                    </li>
+                    
+                {% endif %}
+                
+                <li class="page-item">
+                    <a href="#" class="page-link">
+                        <span aria-hidden="true">{{ page.number }} of {{ page.paginator.num_pages }}</span>
+                    </a>
+                </li>
+                                
+                {% if page.has_next %}
+                    <li class="page-item">
+                            <a class="page-link" href="{{ page.paginator.baseurl }}{{ page.next_page_number }}" aria-label="Next">
+                                <span aria-hidden="true">next</span>
+                            </a>
+                    </li>
+                    <li class="page-item">
+                            <a class="page-link" href="{{ page.paginator.baseurl }}{{ page.paginator.num_pages }}" aria-label="Last">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                    </li>
+                {% endif %}
+        </ul>
+    </nav>
 {% endblock %}

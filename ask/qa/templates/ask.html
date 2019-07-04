@@ -1,5 +1,26 @@
-<form autocomplete="off" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit">
-</form>
+{% extends "base.html" %}
+{% block title %}
+    {{ block.super }} - ask!
+{% endblock %}
+{% block content %}
+    <form autocomplete="off" method="post">
+        <fieldset>
+            {% csrf_token %}
+            <div class="control-group">
+                <div class="form-group">
+                    <label class="control-label">{{ form.title.label }}</label>
+                    <div class="controls">{{ form.title }}</div>
+                </div>
+                <div class="form-group">
+                    <label class="control-lavel">{{ form.text.label }}</label>
+                    <div class="controls">{{ form.text }}</div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="text-right">
+                    <input type="submit" class="btn btn-primary" value="Submit">
+                </div>
+            </div>
+        </fieldset>
+    </form>
+{% endblock %}

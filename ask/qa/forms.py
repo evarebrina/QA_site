@@ -2,8 +2,14 @@ from django import forms
 from .models import Question, Answer
 
 class AskForm(forms.Form):
-    title = forms.CharField(max_length=100)
-    text = forms.CharField(widget=forms.Textarea)
+    title = forms.CharField(max_length=100, widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'rows': '6',
+        'placeholder': 'title',
+    }))
+    text = forms.CharField(widget=forms.Textarea(attrs={
+        'class': 'form-control',
+    }))
 
     def clean_title(self):
         title = self.cleaned_data['title']
@@ -22,7 +28,11 @@ class AskForm(forms.Form):
         return question
 
 class AnswerForm(forms.Form):
-    text = forms.CharField(widget=forms.Textarea)
+    text = forms.CharField(widget=forms.Textarea(attrs={
+        'class': 'form-control',
+        'rows': '3',
+        'placeholder': 'answer!',
+    }))
     question = forms.IntegerField(widget=forms.HiddenInput)
     
     def clean_text(self):

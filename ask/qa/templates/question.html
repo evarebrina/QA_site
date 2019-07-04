@@ -3,23 +3,53 @@
     {{ block.super }} - Question
 {% endblock %}
 {% block content %}
-    <div class="question-title">
-        <h2>{{ question}}</h2>
-    </div>
-    <div class="question-text">
-        {{ question.text }}
-    </div>
-    <div class="question-answers">
-        <h3>Answers</h3>
-        <form autocomplete="off", method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Submit">
-        </form>
-        <ul>
-        {% for answer in answers %}
-            <li>{{ answer.text }}</li>
-        {% endfor %}
-        </ul>
+    <div class="container" style="padding-top: 20px">
+        <div class="media">
+                <img src="/img/no-avatar.png" class="align-self-start mr-3 img-thumbnail" alt="...">
+                <div class="media-body">
+                    <h5 class="mt-0 mb-1">{{ question}}</h5>
+                    <div class="text-muted">@username</div>
+                    {{ question.text }}
+                </div>
+        </div>
+        <div class="question-answers">
+            <h6><muted>Answers</muted></h6>
+            {% for e in form.non_field_errors %}
+                <div class="alert alert-danger">{{ e }}</div>
+            {% endfor %}
+            <form autocomplete="off" method="post">
+                <fieldset>
+                    {% csrf_token %}
+                    
+                    <div class="control-group 
+                    {% if field.errors %}has-error{% endif %}">
+                        <div class="form-group">
+                            <!--<label class="control-label">{{ form.text.label }}</label>-->
+                            <div class="controls">{{ form.question }}{{ form.text }}</div>
+                        </div>
+                    </div>
+                    
+                </fieldset>
+                <div class="form-actions">
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-ok"></span> Submit
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <hr>    
+            <ul class="list-unstyled">        
+                {% for answer in answers %}
+                    <li class="media">
+                        <img src="/img/no-avatar.png" class="align-self-start mr-3 img-thumbnail" alt="...">
+                        <div class="media-body">
+                            <div class="mt-0 mb-1 text-muted">@username</div>
+                            {{ answer.text }}
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 {% endblock %}

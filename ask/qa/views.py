@@ -49,6 +49,8 @@ def question(request, id, *args, **kwargs):
     answers = models.Answer.objects.filter(question=question)
     if request.method == 'POST':
         form = AnswerForm(request.POST)
+        # if user changed question id
+        #form.question = id
         if form.is_valid():
             answer = form.save()
             url = question.get_absolute_url()
