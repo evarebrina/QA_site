@@ -94,6 +94,7 @@ def signup(request, *args, **kwargs):
             user = User.objects.create_user(**form.get_user())
             #user = User.objects.create_user('john', 'lennon@thebeatles.com', 'johnpassword')
             user.save()
+            login(request, user)
             return HttpResponseRedirect('/')
     else:
         form = SignupForm()
