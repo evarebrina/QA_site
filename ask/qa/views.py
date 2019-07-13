@@ -74,9 +74,22 @@ def question(request, id, *args, **kwargs):
     })
 
 
-def like(request, *args, **kwargs):
+def like(request, id, *args, **kwargs):
     print(str(request.body))
-    return HttpResponse(1)
+    print('123')
+    try:
+        question = models.Question.objects.filter(pk=id).get()
+    except models.Question.DoesNotExist:
+        raise Http404("Question does not exist")
+    if request.user.is_authenticated:
+        print('USER IS AUTHENTICATED')
+        likes = question.likes
+    if request.user in likes.all():
+        likes.remove(request.user)
+    else:
+        likes.add(request.user)
+    question.save()
+    return HttpResponse(likes.count())
 
 
 @login_required(login_url='/login/')   

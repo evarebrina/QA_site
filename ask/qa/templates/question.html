@@ -9,25 +9,10 @@
                 <div class="media-body">
                     <h5 class="mt-0 mb-1">{{ question}}</h5>
                     <div class="text-muted">@{{ question.author }}</div>
-                    {{ question.text }}
-                    <script>
-                        var likes = {{ question.likes.count }};
-                        function like(){
-                            var xhr = new XMLHttpRequest();
-                            xhr.open('POST', window.location.href + 'like/', true)
-                            xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}')
-                            xhr.send(JSON.stringify({'value': 2, 'value': 2}));
-                            xhr.onreadystatechange = function(){
-                                if (xhr.readyState == 4) {
-                                    if (xhr.status == 200) {
-                                        alert (xhr.responseText);
-                                    }
-                                }
-                            }
+                    {{ question.text }}<br>
 
-                        }
-                    </script>
-                    <a onclick="like()">Like {{ question.likes.count }}</a>
+                    <button class="btn btn-link" id="like" onclick="like()">Like {{ question.likes.count }}</button>
+
                 </div>
         </div>
         <div class="question-answers">
@@ -68,6 +53,23 @@
                 {% endfor %}
             </ul>
         </div>
-    </div>
+    </div><!-- TODO rewrite it-->
+    <script>
+        var likes = {{ question.likes.count }};
+        function like(){
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', window.location.href + 'like/', true)
+            xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}')
+            xhr.send(JSON.stringify({}));
+            xhr.onreadystatechange = function(){
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        document.getElementById("like").innerText="Like " +xhr.responseText;
+                    }
+                }
+            }
+
+        }
+    </script>
 {% endblock %}
 
