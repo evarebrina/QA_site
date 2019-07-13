@@ -80,9 +80,12 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'qa',
         'USER': 'vadim',
+        'HOST': '0.0.0.0',
+        'PORT': '3306'
     }
 }
 
+AUTH_USER_MODEL = 'qa.User'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators

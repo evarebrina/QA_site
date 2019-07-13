@@ -29,6 +29,7 @@ class AskForm(forms.Form):
         question.save()
         return question
 
+
 class AnswerForm(forms.Form):
     text = forms.CharField(widget=forms.Textarea(attrs={
         'class': 'form-control',
@@ -61,7 +62,8 @@ class AnswerForm(forms.Form):
         answer.author = user
         answer.save()
         return answer
-        
+
+
 class SignupForm(forms.Form):
     username = forms.CharField(max_length=30)
     email = forms.EmailField()
@@ -69,7 +71,8 @@ class SignupForm(forms.Form):
     
     def get_user(self):
         return self.cleaned_data
-    
+
+
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=30)
     password = forms.CharField(widget=forms.PasswordInput)
