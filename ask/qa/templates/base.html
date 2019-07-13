@@ -13,9 +13,9 @@
 
     <title>{% block title %}Q&A{% endblock %}</title>
 </head>
-<body>
+<body style="background-color: #c2cad0 !important">
     
-    <nav class="navbar navbar-fixed-top navbar-light navbar-expand-lg bg-light">
+    <nav class="navbar navbar-fixed-top navbar-dark navbar-expand-lg bg-dark">
         <div class="container">
             <a class="navbar-brand" href="/">Q&A</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-label="Toggle navigation">
@@ -25,14 +25,18 @@
                 <ul class="nav navbar-nav">
                     <li class="navbar-item"><a class="nav-link" href="/">new</a></li>
                     <li class="navbar-item"><a class="nav-link" href="/popular/">popular</a></li>
+                    
                 </ul>
-                <ul class="nav navbar-nav pull-rigth">
-                    <li class="navbar-item"><a class="pull-right btn btn-sm btn-outline-success navbar-btn" href="/login/">log in</a></li>
-                    <li class="navbar-item"><a class="btn btn-sm btn-success navbar-btn"style="margin-left:10px" href="/signup/">sign up</a></li>
-                    <li class="navbar-item"><a class="btn btn-sm btn-success navbar-btn"style="margin-left:10px" href="/ask/">ask!</a></li>
+                <div class="navbar-item my-2 mx-md-2"><a class="btn btn-sm btn-success navbar-btn" href="/ask/">ask!</a></div>
+                <ul class="nav navbar-nav ml-auto">
+                    {% if not user.is_authenticated %}
+                        <li class="navbar-item my-2 mx-md-2"><a class="btn btn-sm btn-outline-success navbar-btn" href="/login/">log in</a></li>
+                        <li class="navbar-item my-2 mx-md-2"><a class="btn btn-sm btn-success navbar-btn" href="/signup/">sign up</a></li>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                        <li class="navbar-item my-2 mx-md-2"><a class="btn btn-sm btn-success navbar-btn" href="/logout/">log out</a></li>
+                    {% endif %}
                 </ul>
-                
-                
             </div>
         </div>
     </nav>
@@ -40,60 +44,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3 col-xs-pull-9 d-none d-sm-block" style="background-color: #99ccff">
-                
-                <div style="margin-top:20px">
-                    <h6>Categories:</h6>
-                    <span class="badge badge-secondary">Science</span>
-                    <span class="badge badge-secondary">Vegan</span>
-                    <span class="badge badge-secondary">Ecology</span>
-                    <span class="badge badge-secondary">Politics</span>
-                    <span class="badge badge-secondary">Prgogramming</span>
-                    <span class="badge badge-secondary">Health</span>
-                    <span class="badge badge-secondary">Food</span>
-                    <span class="badge badge-secondary">Bdsm</span>
-                    <span class="badge badge-secondary">Technologies</span>
-                    <span class="badge badge-secondary">Music</span>
-                    <span class="badge badge-secondary">Other</span>
-                    <span class="badge badge-secondary">Lifestyle</span>
-                    <span class="badge badge-secondary">Study</span>
-                    <span class="badge badge-secondary">Lgbt</span>
-                    <span class="badge badge-secondary">Www</span>
-                    <span class="badge badge-secondary">Pregnancy</span>
-                    <span class="badge badge-secondary">Games</span>
-                    <span class="badge badge-secondary">Animal rights</span>
-                    <span class="badge badge-secondary">Education</span>
-                    <span class="badge badge-secondary">News</span>
-                    <span class="badge badge-secondary">Entertainment</span>
-                </div>
-                
-                <div style="margin-top:20px">
-                    <h6>Tags:</h6>
-                    <span class="badge">#python</span>
-                    <span class="badge">#django</span>
-                    <span class="badge">#mysql</span>
-                    <span class="badge">#gunicorn</span>
-                    <span class="badge">#linux</span>
-                    <span class="badge">#nginx</span>
-                    <span class="badge">#bootstrap</span>
-                    <span class="badge">#css</span>
-                    <span class="badge">#html</span>
-                    <span class="badge">#toomanyhashtags</span>
-                    <span class="badge">#web</span>
-                    <span class="badge">#apple</span>
-                    <span class="badge">#summer</span>
-                    <span class="badge">#fun</span>
-                    <span class="badge">#success</span>
-                    <span class="badge">#architecture</span>
-                    <span class="badge">#school</span>
-                    <span class="badge">#keyboard</span>
-                    <span class="badge">#chair</span>
-                    <span class="badge">#mouse</span>
-                    <span class="badge">#vegan</span>
-                    <span class="badge">#nature</span>
-                    <span class="badge">#animalrights</span>
-                    <span class="badge">#freedom</span>
-                    <span class="badge">#pride</span>
-                </div>
+                <!--Categories and tags-->
             </div>
             <div class="col-md-9 col-xs-pull-3" style="background-color: #d2d5d8">
                 {% block content %}

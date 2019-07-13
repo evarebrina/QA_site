@@ -15,17 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from qa.views import index, popular, question, ask, signup, login_view, logout_view
+from qa import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index),
-    path('login/', login_view),
-    path('logout/', logout_view),
-    path('signup/', signup),
-    path('question/<int:id>/', question),
-    path('ask/', ask),
-    path('popular/', popular, name='popular'),
+    path('', views.index),
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
+    path('signup/', views.signup, name='signup'),
+    path('question/<int:id>/', views.question, name='question'),
+    path('question/<int:id>/like/', views.like, name='like'),
+    path('ask/', views.ask, name='ask'),
+    path('popular/', views.popular, name='popular'),
     path('new/', include('qa.urls')),
 ]
 

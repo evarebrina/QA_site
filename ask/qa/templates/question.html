@@ -10,6 +10,24 @@
                     <h5 class="mt-0 mb-1">{{ question}}</h5>
                     <div class="text-muted">@{{ question.author }}</div>
                     {{ question.text }}
+                    <script>
+                        var likes = {{ question.likes.count }};
+                        function like(){
+                            var xhr = new XMLHttpRequest();
+                            xhr.open('POST', window.location.href + 'like/', true)
+                            xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}')
+                            xhr.send(JSON.stringify({'value': 2, 'value': 2}));
+                            xhr.onreadystatechange = function(){
+                                if (xhr.readyState == 4) {
+                                    if (xhr.status == 200) {
+                                        alert (xhr.responseText);
+                                    }
+                                }
+                            }
+
+                        }
+                    </script>
+                    <a onclick="like()">Like {{ question.likes.count }}</a>
                 </div>
         </div>
         <div class="question-answers">
@@ -20,7 +38,6 @@
             <form autocomplete="off" method="post">
                 <fieldset>
                     {% csrf_token %}
-                    
                     <div class="control-group 
                     {% if field.errors %}has-error{% endif %}">
                         <div class="form-group">
@@ -53,3 +70,4 @@
         </div>
     </div>
 {% endblock %}
+
