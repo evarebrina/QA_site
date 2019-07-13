@@ -9,7 +9,8 @@
             <img src="/img/no-avatar.png" alt="" class="align-self-start mr-3">
             <div class="media-body">
                 <h6 class="mt-0 mb-1">{{ question }}</h6>
-                @{{ question.author }} <a href="{{ question.get_absolute_url }}">Read</a>
+                <a href="/profile/{{ question.author }}">@{{ question.author }}</a>
+                <a href="{{ question.get_absolute_url }}">Read</a>
             </div>
             
         </li>

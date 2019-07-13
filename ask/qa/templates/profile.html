@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container max-height">
+        <div class="row profile">
+            <div class="col-md-3">
+                <img src="/img/{{ user.userpic }}" class="img-fluid">
+                {% if is_personal %}Change{% endif %}
+                <div class="text-center">@{{ user.username }}</div>
+            </div>
+            <div class="col-md-9">
+                First name: {{ user.first_name }} {% if is_personal %}Change{% endif %}<br>
+                Last name: {{ user.last_name }} {% if is_personal %}Change{% endif %}<br>
+                Date joined: {{ user.date_joined }} {% if is_personal %}{% endif %}<br>
+            </div>
+        </div>
+    <hr>
+    </div>
+{% endblock %}

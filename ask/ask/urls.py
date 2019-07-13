@@ -28,5 +28,6 @@ urlpatterns = [
     path('ask/', views.ask, name='ask'),
     path('popular/', views.popular, name='popular'),
     path('new/', include('qa.urls')),
+    path('profile/<str:username>', views.profile, name='profile'),
 ]
 

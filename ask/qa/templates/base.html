@@ -34,6 +34,7 @@
                         <li class="navbar-item my-2 mx-md-2"><a class="btn btn-sm btn-success navbar-btn" href="/signup/">sign up</a></li>
                     {% endif %}
                     {% if user.is_authenticated %}
+                        <li class="navbar-item my-2 mx-md-2"><a class="btn btn-sm btn-link navbar-btn" href="/profile/{{ user.username }}">my profile</a></li>
                         <li class="navbar-item my-2 mx-md-2"><a class="btn btn-sm btn-success navbar-btn" href="/logout/">log out</a></li>
                     {% endif %}
                 </ul>

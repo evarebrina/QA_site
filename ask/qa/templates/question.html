@@ -8,10 +8,12 @@
                 <img src="/img/no-avatar.png" class="align-self-start mr-3 img-thumbnail" alt="...">
                 <div class="media-body">
                     <h5 class="mt-0 mb-1">{{ question}}</h5>
-                    <div class="text-muted">@{{ question.author }}</div>
+                    <a href="/profile/{{ question.author }}"><div class="text-muted">@{{ question.author }}</div></a>
                     {{ question.text }}<br>
 
-                    <button class="btn btn-link" id="like" onclick="like()">Like {{ question.likes.count }}</button>
+                    <button class="btn btn-link" id="like" {% if user.is_authenticated %} onclick="like()" {% endif %}>
+                        Like {{ question.likes.count }}
+                    </button> <!--TODO add redirect for unathenticated users -->
 
                 </div>
         </div>
@@ -46,7 +48,9 @@
                     <li class="media">
                         <img src="/img/no-avatar.png" class="align-self-start mr-3 img-thumbnail" alt="...">
                         <div class="media-body">
-                            <div class="mt-0 mb-1 text-muted">@{{ answer.author }}</div>
+                            <a href="/profile/{{ answer.author }}">
+                                <div class="mt-0 mb-1 text-muted">@{{ answer.author }}</div>
+                            </a>
                             {{ answer.text }}
                         </div>
                     </li>

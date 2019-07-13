@@ -77,17 +77,17 @@ def question(request, id, *args, **kwargs):
 def like(request, id, *args, **kwargs):
     print(str(request.body))
     print('123')
-    try:
-        question = models.Question.objects.filter(pk=id).get()
-    except models.Question.DoesNotExist:
-        raise Http404("Question does not exist")
     if request.user.is_authenticated:
+        try:
+            question = models.Question.objects.filter(pk=id).get()
+        except models.Question.DoesNotExist:
+            return HttpResponse("Question does not exist")
         print('USER IS AUTHENTICATED')
         likes = question.likes
-    if request.user in likes.all():
-        likes.remove(request.user)
-    else:
-        likes.add(request.user)
+        if request.user in question.likes.all():
+            question.likes.remove(request.user)
+        else:
+            question.likes.add(request.user)
     question.save()
     return HttpResponse(likes.count())
 
@@ -151,3 +151,19 @@ def login_view(request, *args, **kwargs):
 def logout_view(request, *args, **kwargs):
     logout(request)
     return HttpResponseRedirect('/')
+
+
+@login_required(login_url='/login/')
+def profile(request, username):
+    try:
+        user = models.User.objects.get(username=username)
+    except models.User.DoesNotExist:
+
+        return HttpResponse(status=404)
+    is_personal = False
+    if request.user == user:
+        is_personal = True
+    return render(request, 'profile.html', {
+        'user': user,
+        'is_personal': is_personal,
+    })

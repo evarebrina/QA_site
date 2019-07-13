@@ -76,11 +76,19 @@ WSGI_APPLICATION = 'ask.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'qa',
+    #     'USER': 'vadim',
+    #     'HOST': '0.0.0.0',
+    #     'PORT': '3306'
+    # }
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'qa',
         'USER': 'vadim',
-        'HOST': '0.0.0.0',
+        'PASSWORD': 's3KjBu2NJJTH7wv',
+        'HOST': 'qa.c0ifxsai3xuv.us-east-2.rds.amazonaws.com',
         'PORT': '3306'
     }
 }
