@@ -78,8 +78,8 @@ WSGI_APPLICATION = 'ask.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'qa',
-        'USER': 'vadim',
+        'NAME': os.getenv('DB_NAME', 'qa'),
+        'USER': os.getenv('DB_USER', 'vadim'),
     }
 }
 
